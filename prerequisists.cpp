@@ -46,15 +46,30 @@ void swapInt(int* a, int* b){
     swap(*a, *b);
 }
 
+
 int main() {
-    int a, b;
-    int *p = &a;
-    int *q = &b;
-    cout << "Enter two numbers: ";
-    cin >> *p >> *q;
-    cout << "Before swap\nA: " << *p << ", B: " << *q << "\n";
-    swapInt(p, q);
-    cout << "After swap\nA: " << *p << ", B: " << *q << "\n";
+
+    int lists[5] = {};
+    int*  p = lists;
+    int i = 0;
+    while (i < 5) {
+        cout << "testing";
+        cin >> lists[i];
+        i++;
+    }
+    i = 0;
+    while (i < 5) {
+        cout << "Here is value from index  " <<  i << ": " << *(p + i) << "\n";
+        i++;
+    }
+    // int a, b;
+    // int *p = &a;
+    // int *q = &b;
+    // cout << "Enter two numbers: ";
+    // cin >> *p >> *q;
+    // cout << "Before swap\nA: " << *p << ", B: " << *q << "\n";
+    // swapInt(p, q);
+    // cout << "After swap\nA: " << *p << ", B: " << *q << "\n";
     // int result = multiply(a, b);
     // cout << "Multiplication of " << a << " and " << b << " is " << result << "\n"; 
     // ageVerification();
