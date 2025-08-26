@@ -1,22 +1,12 @@
 #include <iostream>
 #include <stack>
 #include <stdexcept>
-using namespace std;
 
 class QueueUsingStacks{
     private:
-        stack<int> first;
-        stack<int> second;
-    public:
-        void enqueue(int value){
-            first.push(value);
-        }
-
-        int dequeue(){
-            if (isEmpty()) {
-                throw runtime_error("Queue is empty...!");
-            }
-
+        std::stack<int> first;
+        std::stack<int> second;
+        void transfer_Element(){
             if (second.empty()) {
                 while (!first.empty()) {
                     int temp = first.top();
@@ -24,9 +14,28 @@ class QueueUsingStacks{
                     second.push(temp);
                 }
             }
+        }
+    public:
+        void enqueue(int value){
+            first.push(value);
+        }
+
+        int dequeue(){
+            if (isEmpty()) {
+                throw std::runtime_error("Queue is empty...!");
+            }
+            transfer_Element();
             int temp = second.top();
             second.pop();
             return temp;
+        }
+
+        int front(){
+            if (isEmpty()) {
+                throw std::runtime_error("Queue is empty...!");
+            }
+            transfer_Element();
+            return second.top();
         }
 
         bool isEmpty(){
@@ -39,7 +48,7 @@ int main() {
     queue1.enqueue(4);
     queue1.enqueue(7);
     queue1.enqueue(9);
-    cout << queue1.dequeue();
+    std::cout << queue1.dequeue();
     return 0;
 }
 
