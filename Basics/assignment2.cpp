@@ -99,13 +99,10 @@ class Buffer{
             cout << "Buffer& operator=(Buffer&&) - Move Assignment Operator\n";
             if (this != &other) {
                 delete[] data;
-
                 data = other.data;
                 size = other.size;
-
                 other.data = nullptr;
                 other.size = 0;
-
             }
             return *this;
         }
