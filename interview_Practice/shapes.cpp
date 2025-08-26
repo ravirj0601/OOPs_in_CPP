@@ -12,7 +12,7 @@ class Shape{
         Shape(){}
         virtual double area() const = 0; // I can not make object of this class as it is a 
                                          // abstract class 
-        virtual ~Shape () {};
+        virtual ~Shape () = default;
 };
 
 // Derieved Class 
