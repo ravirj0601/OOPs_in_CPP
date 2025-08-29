@@ -1,7 +1,12 @@
+#include <chrono>
 #include <exception>
+#include <functional>
 #include <iostream>
 #include <mutex>
+#include <ratio>
 #include <stdexcept>
+#include <thread>
+#include <type_traits>
 
 struct Account{
     std::mutex m;
@@ -43,19 +48,46 @@ void transferAmt1(Account& to, Account& from , int amt){
     to.balance += amt;
 }
 
+void worker1(Account& a1,  Account& a2){
+   for (int i = 0; i < 1000000; i++) {
+        transferAmt1(a1, a2, 1);
+   }
+}
+void worker2(Account& a1,  Account& a2){
+   for (int i = 0; i < 1000000; i++) {
+        transferAmt1(a2, a1, 1);
+   }
+}
+
+
 int main(int argc, char *argv[]) {
-    Account a1(1000);
-    Account a2(2000);
+    Account a1(1000000);
+    Account a2(2000000);
     
-    int amt = atoi(argv[1]);
+    // int amt1 = atoi(argv[1]);
+    // int amt2 = atoi(argv[2]);
+    int totalSum = a1.balance + a2.balance;
+    std::cout <<"a1: " << a1.balance << ", a2: " << a2.balance <</* ", Amount to be transfer: " \
+        << amt << */", Sum of both Account: " << totalSum << std::endl;
     
-    std::cout <<"a1: " << a1.balance << ", a2: " << a2.balance << ", Amount to be transfer: " << amt << "\n";
-    try {
-        transferAmt1(a1, a2, amt);
-    } catch (std::exception& e) {
-        std::cerr << "Error found: " << e.what() << "\n";
-    }
-    std::cout <<"a1: " << a1.balance << ", a2: " << a2.balance << "\n";
+    std::thread t1(worker1, std::ref(a1), std::ref(a2));
+   std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    
+    std::cout <<"a1: " << a1.balance << ", a2: " << a2.balance <</* ", Amount to be transfer: " \
+        << amt << */", Sum of both Account: " << totalSum << std::endl;
+    
+    std::thread t2(worker2, std::ref(a1), std::ref(a2));
+    
+    t1.join();
+    t2.join();
+    // try {
+    //    transferAmt1(a1, a2, amt);
+    // } catch (const std::exception& e) {
+    //     std::cerr << "Error found: " << e.what() << "\n";
+    // }
+    //
+    std::cout <<"a1: " << a1.balance << ", a2: " << a2.balance << ", Sum of both Account: " \
+        << a1.balance + a2.balance << std::endl;
 
     return 0;
 }
