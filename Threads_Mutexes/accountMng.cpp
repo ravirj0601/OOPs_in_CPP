@@ -66,6 +66,7 @@ int main(int argc, char *argv[]) {
     
     // int amt1 = atoi(argv[1]);
     // int amt2 = atoi(argv[2]);
+
     int totalSum = a1.balance + a2.balance;
     std::cout <<"a1: " << a1.balance << ", a2: " << a2.balance <</* ", Amount to be transfer: " \
         << amt << */", Sum of both Account: " << totalSum << std::endl;
@@ -80,12 +81,7 @@ int main(int argc, char *argv[]) {
     
     t1.join();
     t2.join();
-    // try {
-    //    transferAmt1(a1, a2, amt);
-    // } catch (const std::exception& e) {
-    //     std::cerr << "Error found: " << e.what() << "\n";
-    // }
-    //
+    
     std::cout <<"a1: " << a1.balance << ", a2: " << a2.balance << ", Sum of both Account: " \
         << a1.balance + a2.balance << std::endl;
 
