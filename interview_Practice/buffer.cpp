@@ -11,22 +11,28 @@ class Buffer{
         
         Buffer() = default;
 
-        explicit Buffer(vector<int> vec)  noexcept : arr_(vec){}
+        explicit Buffer(vector<int> vec)  noexcept : arr_(vec){
+            cout << "Parameterized ctor\n";
+        }
         ~Buffer(){
-            arr_.clear();
+            cout << "Destructor\n";
         }
         
         // Copy constructor
-        Buffer(const Buffer& other) : arr_(other.arr_){}
-        
+        Buffer(const Buffer& other) : arr_(other.arr_){
+            cout << "Copy ctor:\n";
+        }
         // Move Constructor
-        Buffer(const Buffer&& other) : arr_(std::move(other.arr_)){}
+        Buffer(Buffer&& other) : arr_(std::move(other.arr_)){
+            cout << "Move ctor:\n";
+        }
         
         // Copy assignment
         Buffer& operator=(const Buffer& other){
-            if (this != &other) {
-                return *this;
-            }
+            cout << "Copy assign:\n";
+            //if (this != &other) {
+            //    return *this;
+            //}
             Buffer tmp(other);
             swap(tmp);
             return *this;
@@ -34,9 +40,10 @@ class Buffer{
 
         // Move assignment
         Buffer& operator=(Buffer&& other) noexcept {
-            if (this != &other) {
-                return *this;
-            }
+            cout << "Move assign\n";
+            // if (this != &other) {
+            //     return *this;
+            // }
             arr_ = std::move(other.arr_);
             return *this;
         }
