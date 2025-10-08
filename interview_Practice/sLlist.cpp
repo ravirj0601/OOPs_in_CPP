@@ -69,6 +69,24 @@ class NodeOps{
             cout << "\n";
         }
 
+        void reverseList(){
+            
+            if (head == nullptr) {
+                cout << "List is empty..!\n";
+                return;
+            }
+            Node* prev_Node = nullptr;
+            Node* curr_Node = head;
+            Node* next_Node = nullptr;
+            while (curr_Node !=  nullptr) {
+                next_Node = curr_Node->next;
+                curr_Node->next = prev_Node;
+                prev_Node = curr_Node;
+                curr_Node = next_Node;
+            }
+            head = prev_Node;
+        }
+
         ~NodeOps(){
             while (head != nullptr) {
                 Node* temp = head->next;
@@ -87,6 +105,8 @@ int main() {
     list1.insertAtEnd(10);
     list1.displayList();
     list1.deleteNode(8);
+    list1.displayList();
+    list1.reverseList();
     list1.displayList();
     return 0;
 }
