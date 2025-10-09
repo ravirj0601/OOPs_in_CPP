@@ -1,0 +1,4 @@
+[2025-10-09 20:18:52] [INFO] Application started.
+[2025-10-09 20:18:52] [WARN] Configuration file not found, using defaults.
+[2025-10-09 20:18:52] [ERROR] Failed to connect to database!
+[2025-10-09 20:18:52] [WARN] Another warning message.
