@@ -1,12 +1,9 @@
 #include <chrono>
-#include <exception>
 #include <functional>
 #include <iostream>
 #include <mutex>
-#include <ratio>
 #include <stdexcept>
 #include <thread>
-#include <type_traits>
 
 struct Account{
     std::mutex m;
